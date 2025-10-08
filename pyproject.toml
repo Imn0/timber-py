@@ -1,0 +1,16 @@
+[build-system]
+requires = ["setuptools>=45", "wheel", "setuptools-scm[toml]>=6.2"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "timber"
+dynamic = ["version"]
+description = "Python bindings for the timber logging library"
+requires-python = ">=3.7"
+
+[project.urls]
+Homepage = "https://github.com/Imn0/timber-py"
+"Bug Tracker" = "https://github.com/Imn0/timber-py/issues"
+
+[tool.setuptools]
+packages = ["timber"]
