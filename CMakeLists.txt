@@ -1,6 +1,10 @@
 cmake_minimum_required(VERSION 3.15)
 project(timber_python)
 
+if(NOT DEFINED CMAKE_BUILD_TYPE)
+    set(CMAKE_BUILD_TYPE "Release" CACHE STRING "Choose the type of build." FORCE)
+endif()
+
 find_package(Python COMPONENTS Interpreter Development REQUIRED)
 
 set(BUILD_SHARED_LIBS OFF CACHE BOOL "" FORCE)
@@ -16,6 +20,7 @@ set_target_properties(timber-static PROPERTIES
 
 Python_add_library(_timber MODULE
     timber/_timber.c
+    WITH_SOABI
 )
 
 target_link_libraries(_timber PRIVATE timber-static)
@@ -26,10 +31,21 @@ target_include_directories(_timber PRIVATE
 
 set_target_properties(_timber PROPERTIES
     OUTPUT_NAME "_timber"
+    LIBRARY_OUTPUT_DIRECTORY "${CMAKE_LIBRARY_OUTPUT_DIRECTORY}"
+    RUNTIME_OUTPUT_DIRECTORY "${CMAKE_LIBRARY_OUTPUT_DIRECTORY}"
 )
 
-if(DEFINED CMAKE_LIBRARY_OUTPUT_DIRECTORY)
+if(CMAKE_CONFIGURATION_TYPES)
+    foreach(config ${CMAKE_CONFIGURATION_TYPES})
+        string(TOUPPER ${config} config_upper)
+        set_target_properties(_timber PROPERTIES
+            LIBRARY_OUTPUT_DIRECTORY_${config_upper} "${CMAKE_LIBRARY_OUTPUT_DIRECTORY}"
+            RUNTIME_OUTPUT_DIRECTORY_${config_upper} "${CMAKE_LIBRARY_OUTPUT_DIRECTORY}"
+        )
+    endforeach()
+else()
     set_target_properties(_timber PROPERTIES
         LIBRARY_OUTPUT_DIRECTORY "${CMAKE_LIBRARY_OUTPUT_DIRECTORY}"
+        RUNTIME_OUTPUT_DIRECTORY "${CMAKE_LIBRARY_OUTPUT_DIRECTORY}"
     )
 endif()

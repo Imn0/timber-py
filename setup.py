@@ -55,7 +55,6 @@ class CMakeBuild(build_ext):
             "-DBUILD_SHARED_LIBS=OFF",
             "-DBUILD_TESTS=OFF",
             "-DBUILD_EXAMPLES=OFF",
-            "-DBUILD_PYTHON_BINDINGS=OFF",
         ]
 
         build_args = ["--config", "Debug" if self.debug else "Release"]
@@ -93,6 +92,4 @@ setup(
     python_requires=">=3.6",
     zip_safe=False,
     description="Python bindings for timber-c logging library",
-    author="Your Name",
-    author_email="your.email@example.com",
 )
