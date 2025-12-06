@@ -1,6 +1,5 @@
 #include <Python.h>
 #include <frameobject.h>
-#include <tmb/sink.h>
 #include <tmb/tmb.h>
 
 static int extract_caller_info(const char** filename,
@@ -95,7 +94,7 @@ static PyObject* py_tmb_fatal(PyObject* self, PyObject* args) {
 
     const char* filename_base = get_basename(filename);
 
-    tmb_log_ctx_t ctx = { .log_level         = LOG_LEVEL_FATAL,
+    tmb_log_ctx_t ctx = { .log_level         = TMB_LOG_LEVEL_FATAL,
                           .line_no           = line_no,
                           .filename          = filename,
                           .filename_len      = (int)strlen(filename),
@@ -122,7 +121,7 @@ static PyObject* py_tmb_error(PyObject* self, PyObject* args) {
 
     const char* filename_base = get_basename(filename);
 
-    tmb_log_ctx_t ctx = { .log_level         = LOG_LEVEL_ERROR,
+    tmb_log_ctx_t ctx = { .log_level         = TMB_LOG_LEVEL_ERROR,
                           .line_no           = line_no,
                           .filename          = filename,
                           .filename_len      = (int)strlen(filename),
@@ -149,7 +148,7 @@ static PyObject* py_tmb_warning(PyObject* self, PyObject* args) {
 
     const char* filename_base = get_basename(filename);
 
-    tmb_log_ctx_t ctx = { .log_level         = LOG_LEVEL_WARNING,
+    tmb_log_ctx_t ctx = { .log_level         = TMB_LOG_LEVEL_WARNING,
                           .line_no           = line_no,
                           .filename          = filename,
                           .filename_len      = (int)strlen(filename),
@@ -176,7 +175,7 @@ static PyObject* py_tmb_info(PyObject* self, PyObject* args) {
 
     const char* filename_base = get_basename(filename);
 
-    tmb_log_ctx_t ctx = { .log_level         = LOG_LEVEL_INFO,
+    tmb_log_ctx_t ctx = { .log_level         = TMB_LOG_LEVEL_INFO,
                           .line_no           = line_no,
                           .filename          = filename,
                           .filename_len      = (int)strlen(filename),
@@ -203,7 +202,7 @@ static PyObject* py_tmb_debug(PyObject* self, PyObject* args) {
 
     const char* filename_base = get_basename(filename);
 
-    tmb_log_ctx_t ctx = { .log_level         = LOG_LEVEL_DEBUG,
+    tmb_log_ctx_t ctx = { .log_level         = TMB_LOG_LEVEL_DEBUG,
                           .line_no           = line_no,
                           .filename          = filename,
                           .filename_len      = (int)strlen(filename),
@@ -230,7 +229,7 @@ static PyObject* py_tmb_trace(PyObject* self, PyObject* args) {
 
     const char* filename_base = get_basename(filename);
 
-    tmb_log_ctx_t ctx = { .log_level         = LOG_LEVEL_TRACE,
+    tmb_log_ctx_t ctx = { .log_level         = TMB_LOG_LEVEL_TRACE,
                           .line_no           = line_no,
                           .filename          = filename,
                           .filename_len      = (int)strlen(filename),
